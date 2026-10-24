@@ -1,0 +1,351 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b1b">
+<title>The Chichi Files 🔎</title>
+
+<style>
+:root {
+  --gold: #f5cf83;
+  --cream: #fff3dc;
+  --muted: #a9b0cb;
+  --panel: rgba(22, 28, 55, .84);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--cream);
+  font-family: Georgia, "Times New Roman", serif;
+  background:
+    radial-gradient(ellipse at 50% 0%, #25305b 0%, transparent 55%),
+    linear-gradient(160deg, #080b1b, #11172c 65%, #080b1b);
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .45;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 37px 37px;
+  animation: stars 16s linear infinite;
+}
+@keyframes stars {
+  from { transform: translateY(0); }
+  to { transform: translateY(-37px); }
+}
+button, input { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+.wrap {
+  width: min(100% - 32px, 620px);
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+header {
+  padding: 22px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #ffffff1c;
+}
+.brand {
+  letter-spacing: 2px;
+  font: 700 11px Arial, sans-serif;
+  color: var(--gold);
+}
+.music {
+  border: 1px solid #f5cf8355;
+  border-radius: 30px;
+  background: #ffffff08;
+  color: var(--cream);
+  padding: 10px 13px;
+  font: 12px Arial, sans-serif;
+}
+main { padding: 48px 0 70px; }
+.eyebrow {
+  color: var(--gold);
+  font: 11px Arial, sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+h1 {
+  font-size: clamp(43px, 12vw, 70px);
+  line-height: .98;
+  font-weight: 400;
+  margin: 18px 0;
+  letter-spacing: -2px;
+}
+h1 span { color: var(--gold); font-style: italic; }
+p { line-height: 1.75; color: var(--muted); }
+.intro { font-size: 16px; max-width: 440px; }
+.seal {
+  width: 104px;
+  height: 104px;
+  margin: 35px auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid #f5cf8366;
+  border-radius: 50%;
+  color: var(--gold);
+  font-size: 43px;
+  box-shadow: 0 0 35px #f5cf8310, inset 0 0 25px #f5cf830b;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  50% { transform: translateY(-8px); }
+}
+.panel {
+  border: 1px solid #ffffff20;
+  background: var(--panel);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 18px 60px #0003;
+  backdrop-filter: blur(12px);
+}
+button.primary {
+  width: 100%;
+  border: 0;
+  background: linear-gradient(120deg, #f8dda1, #d7a94f);
+  color: #171324;
+  border-radius: 12px;
+  padding: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: transform .2s, filter .2s;
+}
+button.primary:hover { transform: translateY(-2px); filter: brightness(1.08); }
+button.secondary {
+  border: 1px solid #f5cf8355;
+  border-radius: 10px;
+  padding: 12px 15px;
+  background: transparent;
+  color: var(--gold);
+}
+.hidden { display: none !important; }
+.case-number {
+  font: 11px Arial, sans-serif;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+h2 { font-size: 30px; font-weight: 400; margin: 12px 0; }
+.clue {
+  border-left: 2px solid var(--gold);
+  padding: 4px 0 4px 16px;
+  margin: 24px 0;
+}
+.clue strong {
+  display: block;
+  color: var(--gold);
+  font: 11px Arial, sans-serif;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.clue p { margin: 0; }
+input {
+  width: 100%;
+  padding: 15px;
+  color: white;
+  background: #080b1b;
+  border: 1px solid #ffffff35;
+  border-radius: 10px;
+  margin-top: 12px;
+}
+.feedback { min-height: 28px; font-size: 14px; }
+#reveal { text-align: center; }
+#reveal h2 { color: var(--gold); font-size: 38px; }
+.big-heart {
+  font-size: 52px;
+  animation: float 2.5s ease-in-out infinite;
+}
+footer {
+  text-align: center;
+  color: #78819f;
+  font: 10px Arial, sans-serif;
+  letter-spacing: 2px;
+  padding: 25px 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+<header>
+  <div class="brand">B. O. • CLASSIFIED CASES</div>
+  <button class="music" id="musicBtn" type="button">
+    ♫ Music: Off
+  </button>
+</header>
+
+<main>
+<section id="intro">
+  <div class="eyebrow">A birthday mystery • Case 001</div>
+  <h1>The Chichi<br><span>Files.</span></h1>
+  <p class="intro">
+    Every birthday has a story. But this one has a secret.
+    Someone has hidden a special message for you, Chichi.
+    Your mission is to uncover it.
+  </p>
+  <div class="seal">🔎</div>
+  <div class="panel">
+    <div class="case-number">CONFIDENTIAL • FOR CHICHI ONLY</div>
+    <h2>Are you ready, detective?</h2>
+    <p>
+      Examine the evidence. Follow the clues. Solve the case.
+      Your birthday surprise is waiting behind the truth.
+    </p>
+    <button class="primary" id="beginBtn" type="button">
+      BEGIN THE MYSTERY →
+    </button>
+  </div>
+</section>
+
+<section id="case" class="hidden">
+  <div class="eyebrow">Investigation in progress</div>
+  <h1>The missing<br><span>message.</span></h1>
+  <div class="panel">
+    <div class="case-number">CASE FILE 001 / EVIDENCE LOG</div>
+    <h2>The birthday secret</h2>
+    <p>
+      Detective Chichi, three clues were left behind.
+      Study them carefully. They point towards one answer.
+    </p>
+    <div class="clue">
+      <strong>CLUE 01 — THE CALENDAR</strong>
+      <p>The day is dedicated to someone whose birthday makes today special.</p>
+    </div>
+    <div class="clue">
+      <strong>CLUE 02 — THE SUSPECT</strong>
+      <p>The person responsible is a sibling who knows you well and enjoys teasing you.</p>
+    </div>
+    <div class="clue">
+      <strong>CLUE 03 — THE MOTIVE</strong>
+      <p>It involves love, a little mischief, and a message that cannot stay hidden forever.</p>
+    </div>
+    <p><strong style="color:var(--gold)">Who is behind this birthday surprise?</strong></p>
+    <input id="answer" type="text" placeholder="Enter the suspect's name..." autocomplete="off">
+    <button class="primary" id="solveBtn" type="button">SUBMIT MY THEORY 🔐</button>
+    <p class="feedback" id="feedback" aria-live="polite"></p>
+  </div>
+</section>
+
+<section id="reveal" class="hidden">
+  <div class="eyebrow">Case successfully solved</div>
+  <div class="seal">🔓</div>
+  <div class="panel">
+    <div class="big-heart">🎂❤️</div>
+    <h2>Happy Birthday, Chichi!</h2>
+    <p>
+      Case closed, detective! 😂❤️
+      The culprit is your brother, Beckham.
+    </p>
+    <p>
+      Happy birthday to my amazing sister! I hope your day is filled
+      with laughter, happiness, beautiful surprises, and all the love
+      you deserve. Life would be a lot less interesting without you
+      in it — even if being your brother sometimes requires patience
+      that should honestly qualify as a superpower. 😂
+    </p>
+    <p>
+      Jokes aside, I'm grateful to have you as my sister.
+      I wish you more happiness, more opportunities, strength,
+      and countless reasons to smile in the year ahead.
+      Never forget how special you are and how much you mean to me.
+    </p>
+    <h2>Enjoy your day, Chichi. 🥹</h2>
+    <p>With love, your brother,<br><strong style="color:var(--gold)">Beckham ❤️</strong></p>
+    <div style="font-size:32px;margin-top:20px">✨ 🎁 ✨</div>
+  </div>
+</section>
+</main>
+
+<footer>THE CHICHI FILES • END OF TRANSMISSION</footer>
+</div>
+
+<audio id="bgMusic" loop preload="none">
+  <source src="voice.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const intro = document.getElementById("intro");
+const caseSection = document.getElementById("case");
+const reveal = document.getElementById("reveal");
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+const beginBtn = document.getElementById("beginBtn");
+const answer = document.getElementById("answer");
+const feedback = document.getElementById("feedback");
+
+async function toggleMusic() {
+  if (!music.paused) {
+    music.pause();
+    musicBtn.textContent = "♫ Music: Off";
+    return;
+  }
+
+  try {
+    await music.play();
+    musicBtn.textContent = "♫ Music: On";
+  } catch (error) {
+    musicBtn.textContent = "♫ Tap to retry";
+  }
+}
+
+musicBtn.addEventListener("click", toggleMusic);
+
+beginBtn.addEventListener("click", async () => {
+  intro.classList.add("hidden");
+  caseSection.classList.remove("hidden");
+
+  if (music.paused) {
+    try {
+      await music.play();
+      musicBtn.textContent = "♫ Music: On";
+    } catch (error) {
+      musicBtn.textContent = "♫ Tap for music";
+    }
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  answer.focus({ preventScroll: true });
+});
+
+function solveCase() {
+  const guess = answer.value.trim().toLowerCase();
+
+  if (["beckham", "beckham obondo"].includes(guess)) {
+    caseSection.classList.add("hidden");
+    reveal.classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    feedback.textContent =
+      "❌ Not quite, detective. Revisit the clues and try again.";
+  }
+}
+
+document.getElementById("solveBtn").addEventListener("click", solveCase);
+
+answer.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") solveCase();
+});
+</script>
+</body>
+  </html>
+      
